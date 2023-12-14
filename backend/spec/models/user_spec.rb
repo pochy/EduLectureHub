@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
     )
     expect(user).to be_valid
   end
+
   it "名がない場合、無効である" do
     user = User.new(
       last_name: "田中",
@@ -34,5 +35,23 @@ RSpec.describe User, type: :model do
       password: nil
     )
     expect(user).to be_invalid
+  end
+
+  it "パスワードが6文字未満の場合、無効である" do
+    user = User.new(
+      last_name: "田中",
+      first_name: "太郎",
+      password: "pass"
+    )
+    expect(user).to be_invalid
+  end
+
+  it "パスワードが6文字以上の場合、有効である" do
+    user = User.new(
+      last_name: "田中",
+      first_name: "太郎",
+      password: "password"
+    )
+    expect(user).to be_valid
   end
 end
