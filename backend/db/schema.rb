@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_14_090830) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_14_172925) do
   create_table "lectures", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "instructor_id"
     t.string "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_14_090830) do
     t.integer "period", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["instructor_id"], name: "fk_rails_b21d4bf30a"
   end
 
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_14_090830) do
     t.string "password_digest"
   end
 
+  add_foreign_key "lectures", "users", column: "instructor_id"
   add_foreign_key "schedules", "lectures"
   add_foreign_key "schedules", "users"
 end
