@@ -18,17 +18,22 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile:
+        Dockerfile
         #  args
         #  WORKDIR: app
     volumes:
-      - ./frontend/vite-project:/app/vite-project
+      - ./frontend:/app
     ports:
       - 5173:5173
+    #working_dir: /app/vite-project
     depends_on:
       - backend
     tty: true
-    command: yarn dev --host
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    #command: yarn dev --hos
     networks:
       - vite_rails_net
   backend:
