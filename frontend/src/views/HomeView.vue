@@ -11,7 +11,7 @@ onMounted(async () => {
 
 <template>
   <main>
-		<h1>Home</h1>
-		<div>{{ message }}</div>
-	</main>
+    <h1>Home</h1>
+    <div>{{ message }}</div>
+  </main>
 </template>
