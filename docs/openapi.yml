@@ -1,0 +1,395 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+tags:
+  - name: schedules
+    description: スケジュール
+  - name: lectures
+    description: 講義
+  - name: user
+    description: ユーザー操作
+paths:
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: ログイン
+      description: ログイン `/login`
+      operationId: login
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/loginBody'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginBody'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                パスワード不一致:
+                  value:
+                    code: E1100
+                    message: パスワードが一致しません
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: ログアウト
+      description: ログアウト `/logout`
+      operationId: logout
+      responses:
+        '200':
+          description: OK
+  /user/change_password:
+    put:
+      tags:
+        - user
+      summary: パスワード変更
+      description: パスワード変更 `/password_reset`
+      operationId: passwordReset
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/passwordResetBody'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/passwordResetBody'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                パスワード不一致:
+                  value:
+                    code: E1100
+                    message: パスワードが一致しません
+  /lectures:
+    get:
+      tags:
+        - lectures
+      summary: 講義一覧取得
+      description: 講義一覧取得 `/lectures`
+      operationId: getLectures
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lecture'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                パスワード不一致:
+                  value:
+                    code: E1100
+                    message: パスワードが一致しません
+  /lectures/{id}:
+    get:
+      tags:
+        - lectures
+      summary: 講義取得
+      description: 講義取得 `/lectures/{id}`
+      operationId: getLecture
+      parameters:
+        - name: id
+          in: path
+          description: 講義ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecture'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                講義が存在しない:
+                  value:
+                    code: E1200
+                    message: 講義が存在しません
+  /schedules:
+    get:
+      tags:
+        - schedules
+      summary: スケジュール一覧取得
+      description: スケジュール一覧取得 `/schedules`
+      operationId: getSchedules
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                パスワード不一致:
+                  value:
+                    code: E1100
+                    message: パスワードが一致しません
+    post:
+      tags:
+        - schedules
+      summary: スケジュール作成
+      description: スケジュール作成 `/schedules`
+      operationId: createSchedule
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                スケジュール作成失敗:
+                  value:
+                    code: E3100
+                    message: スケジュールの作成に失敗しました
+  /schedules/{id}:
+    get:
+      tags:
+        - schedules
+      summary: スケジュール取得
+      description: スケジュール取得 `/schedules/{id}`
+      operationId: getSchedule
+      parameters:
+        - name: id
+          in: path
+          description: スケジュールID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                スケジュールが存在しない:
+                  value:
+                    code: E3200
+                    message: スケジュールが存在しません
+    put:
+      tags:
+        - schedules
+      summary: スケジュール更新
+      description: スケジュール更新 `/schedules/{id}`
+      operationId: updateSchedule
+      parameters:
+        - name: id
+          in: path
+          description: スケジュールID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                スケジュールが存在しない:
+                  value:
+                    code: E3200
+                    message: スケジュールが存在しません
+    delete:
+      tags:
+        - schedules
+      summary: スケジュール削除
+      description: スケジュール削除 `/schedules/{id}`
+      operationId: deleteSchedule
+      parameters:
+        - name: id
+          in: path
+          description: スケジュールID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                スケジュールが存在しない:
+                  value:
+                    code: E3200
+                    message: スケジュールが存在しません
+components:
+  schemas:
+    Schedule:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: スケジュールID
+          example: 1
+        lecuture:
+          type: string
+          description: 講義名
+          example: 講義名
+        teacher:
+          type: string
+          description: 講師名
+          example: 講師名
+        day_of_week:
+          type: integer
+          description: 曜日
+          example: 1
+        period:
+          type: integer
+          description: 時限
+          example: 1
+        created_at:
+          type: string
+          description: 作成日時
+          example: 2020-01-01 00:00:00
+        updated_at:
+          type: string
+          description: 更新日時
+          example: 2020-01-01 00:00:00
+    Lecture:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 講義ID
+          example: 1
+        name:
+          type: string
+          description: 講義名
+          example: 講義名
+        teacher:
+          type: string
+          description: 講師名
+          example: 講師名
+        day_of_week:
+          type: integer
+          description: 曜日
+          example: 1
+        period:
+          type: integer
+          description: 時限
+          example: 1
+        created_at:
+          type: string
+          description: 作成日時
+          example: 2020-01-01 00:00:00
+        updated_at:
+          type: string
+          description: 更新日時
+          example: 2020-01-01 00:00:00
+    passwordResetBody:
+      type: object
+      properties:
+        current_password:
+          type: string
+          description: パスワード
+          example: demopass
+        password:
+          type: string
+          description: 新しいパスワード
+          example: demopass
+        password_confirm:
+          type: string
+          description: 新しいパスワード(確認)
+          example: demopass
+    loginBody:
+      type: object
+      properties:
+        loginid:
+          type: string
+          description: ログインId
+          example: demouser
+        password:
+          type: string
+          description: パスワード
+          example: demopass
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
