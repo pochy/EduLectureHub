@@ -10,8 +10,8 @@
 
 # Usersのサンプルデータ
 users = [
-  { password: 'password1', password_confirmation: 'password1', last_name: '田中', first_name: '太郎' },
-  { password: 'password2', password_confirmation: 'password2', last_name: '鈴木', first_name: '花子' },
+  { password: 'password1', password_confirmation: 'password1', last_name: '田中', first_name: '太郎', email: 'test1@example.com' },
+  { password: 'password2', password_confirmation: 'password2', last_name: '鈴木', first_name: '花子', email: 'test2@example.com' },
   # 他のユーザーデータを追加...
 ]
 

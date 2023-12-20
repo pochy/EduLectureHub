@@ -1,0 +1,42 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: "メールアドレスが正常に確認されました。"
+      send_instructions: "数分以内にメールアドレスを確認するための手順を記載したメールが届きます。"
+      send_paranoid_instructions: "メールアドレスがデータベースに存在する場合は、数分以内にメールアドレスを確認するための手順を記載したメールが届きます。"
+    failure:
+      already_authenticated: "すでにサインインしています。"
+      inactive: "アカウントはまだ有効化されていません。"
+      invalid: "無効な%{authentication_keys}またはパスワードです。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "アカウントがロックされる前に、もう一度試行できます。"
+      not_found_in_database: "無効な%{authentication_keys}またはパスワードです。"
+      timeout: "セッションが期限切れです。続行するにはもう一度サインインしてください。"
+      unauthenticated: "続行する前にサインインまたはサインアップしてください。"
+      unconfirmed: "続行する前にメールアドレスを確認してください。"
+    mailer:
+      confirmation_instructions:
+        subject: "確認手順"
+      reset_password_instructions:
+        subject: "パスワードリセット手順"
+      unlock_instructions:
+        subject: "アンロック手順"
+      email_changed:
+        subject: "メールが変更されました"
+      password_change:
+        subject: "パスワードが変更されました"
+    omniauth_callbacks:
+      failure: '%{kind}から認証できませんでした。理由: "%{reason}"。'
+      success: "%{kind}アカウントから正常に認証されました。"
+    passwords:
+      no_token: "パスワードリセットメールからアクセスしない限り、このページにはアクセスできません。パスワードリセットメールからアクセスした場合は、提供されたURL全体を使用してください。"
+      send_instructions: "数分以内にパスワードをリセットするための手順を記載したメールが届きます。"
+      send_paranoid_instructions: "メールアドレスがデータベースに存在する場合は、数分以内にパスワード回復リンクがメールアドレスに送信されます。"
+      updated: "パスワードが正常に変更されました。現在サインインしています。"
+      updated_not_active: "パスワードが正常に変更されました。"
+    registrations:
+      destroyed: "さようなら！アカウントは正常にキャンセルされました。またお会いできることを楽しみにしています。"
+      signed_up: "ようこそ！正常にサインアップしました。"
+      signed_up_but_inactive: "正常にサインアップしました。しかし、アカウントがまだ有効化されていないため、サインインできません。"
+      signed_up_but_locked: "正常にサインアップしました。しかし、アカウントがロックされているため、サインインできません。"
+      signed_up_but_unconfirmed: "確認リンクを記載したメッセージがメールアドレスに送信されました。リンクをフォローしてアカウントを有効化してください。"
