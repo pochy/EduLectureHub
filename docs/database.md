@@ -8,7 +8,9 @@ erDiagram
 
     users {
         bigint id PK "ID"
-        varchar password_digest "ハッシュ化されたパスワード"
+        varchar provider "プロバイダ"
+        varchar uid "ユーザーID"
+        varchar encrypted_password "ハッシュ化されたパスワード"
         varchar last_name "苗字"
         varchar first_name "名前"
         timestamp created_at "作成日時"

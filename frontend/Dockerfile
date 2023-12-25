@@ -4,7 +4,6 @@ WORKDIR /app
 FROM base as bundle
 COPY package-lock.json /app/package-lock.json
 COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
 RUN apt update && npm install
 
 FROM bundle as main

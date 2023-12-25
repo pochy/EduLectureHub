@@ -19,14 +19,14 @@ services:
     build:
       context: ./frontend
       dockerfile:
-        Dockerfile
+        Dockerfile.dev
         #  args
         #  WORKDIR: app
     volumes:
       - ./frontend:/app
-      - /app/node_modules
     ports:
       - 5173:5173
+      - "24678:24678"
     #working_dir: /app/vite-project
     depends_on:
       - backend

@@ -1,6 +1,7 @@
 export type Lecture = {
   id: number
   instructor_id: number
+  schedules_id: number
   title: string
   day_of_week: number
   period: number

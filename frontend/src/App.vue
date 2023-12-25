@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Menu from './components/GlobalMenu.vue'
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <Menu />
   <router-view />
 </template>
 

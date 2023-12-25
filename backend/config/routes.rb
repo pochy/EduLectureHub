@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   scope :api do
     get 'lectures', to: 'lectures#index'
     get 'lectures/:id', to: 'lectures#show'
+
+    resources :schedules
   end
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth'
